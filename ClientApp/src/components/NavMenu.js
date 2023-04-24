@@ -25,31 +25,31 @@ export class NavMenu extends Component {
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 bg-dark text-white" container light>
-                <NavbarBrand tag={Link} className="text-white"  to="/">Contoso University</NavbarBrand>
+                <NavbarBrand tag={Link} className="text-white"  to="/customer-table">OnBoarding</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse className="d-sm-inline-flex" isOpen={!this.state.collapsed} navbar>
             <ul className="navbar-nav flex-grow">
-              <NavItem>
+             {/* <NavItem>
                 <NavLink tag={Link} className="text-white" to="/">Home</NavLink>
-              </NavItem>
+              </NavItem>*/}
               <NavItem>
-                <NavLink tag={Link} className="text-white" to="/Customers">Customers</NavLink>
+                <NavLink tag={Link} className="text-white" to="/customer-table">Customers</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-white" to="/Products">Products</NavLink>
+                            <NavLink tag={Link} className="text-white" to="/product-table">Products</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-white" to="/Stores">Stores</NavLink>
+                            <NavLink tag={Link} className="text-white" to="/store-table">Stores</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={Link} className="text-white" to="/Sales">Sales</NavLink>
+                            <NavLink tag={Link} className="text-white" to="/sales-table">Sales</NavLink>
                         </NavItem>
-              <NavItem>
+              {/*<NavItem>
                 <NavLink tag={Link} className="text-white" to="/counter">Counter</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-white" to="/fetch-data">Fetch data</NavLink>
-              </NavItem>
+              </NavItem>*/}
             </ul>
           </Collapse>
         </Navbar>

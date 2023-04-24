@@ -1,20 +1,24 @@
 import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+
+import CustomerTable from "./Crud App/Customers/CustomerTable";
+
+
+
 
 const AppRoutes = [
-  {
-    index: true,
-    element: <Home />
-  },
+  /*{
+        index: true,
+        element: <Home />
+  },*/
   {
     path: '/counter',
     element: <Counter />
   },
+
   {
-    path: '/fetch-data',
-    element: <FetchData />
-  }
+    path: '/customer-table',
+    element: <CustomerTable />
+    }
 ];
 
 export default AppRoutes;

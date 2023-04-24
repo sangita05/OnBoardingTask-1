@@ -4,13 +4,24 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var CorsPolicy = "_CorsPolicy";
 // Add services to the container.
 //add new line
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ContosoUniversityContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("ContosoUniversityContext")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: CorsPolicy,
+                policy =>
+                {
+                    policy.WithOrigins("https://localhost:44405", "https://localhost:7160") //is that 3000?
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+});
+
 
 //end
 
@@ -57,6 +68,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseCors(CorsPolicy);
 
 app.MapControllerRoute(
     name: "default",
