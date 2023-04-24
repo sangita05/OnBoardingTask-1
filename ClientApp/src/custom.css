@@ -2,6 +2,14 @@
 a {
   color: #0366d6;
 }
+.modal {
+    height: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+}
+
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -15,4 +23,38 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.custom-header th {
+    background-color: lightskyblue !important;
+}
+
+.ui.button.edit-btn {
+    background-color: #2196f3;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+    .ui.button.edit-btn :hover {
+        background-color: green;
+    }
+
+.ui.button.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-number {
+    margin-left: auto;
 }
