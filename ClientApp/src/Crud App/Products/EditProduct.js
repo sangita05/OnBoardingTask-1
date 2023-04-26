@@ -1,31 +1,28 @@
 ﻿import React, { useState } from 'react';
-import { Modal, Button, Form } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
 import axios from 'axios';
 
-function EditCustomer(props) {
-    // State variables for name, address, and error
-    const [name, setName] = useState(props.customer.name);
-    const [address, setAddress] = useState(props.customer.address);
+function EditProduct(props) {
+    const [name, setName] = useState(props.product.name);
+    const [price, setPrice] = useState(props.product.price);
     const [error, setError] = useState(null);
 
-    // Handler functions for name and address changes
+
     function handleNameChange(event) {
         setName(event.target.value);
     }
 
-    function handleAddressChange(event) {
-        setAddress(event.target.value);
+    function handlePriceChange(event) {
+        setPrice(event.target.value);
     }
-
-    // Handler functions for cancel and save buttons
     function handleCancel() {
         props.onClose();
-    }
+    };
 
     function handleSave() {
-        updateCustomer(props.customer.id, name, address)
-            .then((updatedCustomer) => {
-                props.onUpdate(updatedCustomer);
+        return updateProduct(props.product.id, name, price) // <-- use return here
+            .then((updatedProduct) => {
+                props.onUpdate(updatedProduct);
                 props.onClose();
             })
             .catch((error) => {
@@ -33,28 +30,28 @@ function EditCustomer(props) {
             });
     }
 
-    function updateCustomer(id, name, address) {
-        const endpoint = `https://localhost:7160/api/Customers/${id}`;
-        const data = { name, address };
+
+    function updateProduct(id, name, price) {
+        const endpoint = `https://localhost:7160/api/Products/${id}`;
+        const data = { name, price };
 
         return axios
             .put(endpoint, data)
             .then((response) => {
                 if (response.status === 204) {
-                return { id, name, address };
+                    return { id, name, price };
                 } else {
-                throw new Error('Failed to update customer');
-                }
-                })
-                    .catch ((error) => {
                     throw new Error('Failed to update customer');
-          });
+                }
+            })
+            .catch((error) => {
+                throw new Error('Failed to update customer');
+            });
     }
 
-    // Return the modal popup component
     return (
-        <Modal open={props.open} onClose={props.onClose}>
-            <Modal.Header>Edit Customer</Modal.Header>
+        <Modal open={props.open} onClose={props.onClose} >
+            <Modal.Header>Edit Product</Modal.Header>
             {error && <div className="error">{error}</div>}
             <Modal.Content>
                 <Form>
@@ -63,8 +60,8 @@ function EditCustomer(props) {
                         <input value={name} onChange={handleNameChange} />
                     </Form.Field>
                     <Form.Field>
-                        <label>Address</label>
-                        <input value={address} onChange={handleAddressChange} />
+                        <label>Price</label>
+                        <input value={price} onChange={handlePriceChange} />
                     </Form.Field>
                 </Form>
             </Modal.Content>
@@ -76,7 +73,15 @@ function EditCustomer(props) {
     );
 }
 
-export default EditCustomer;
+export default EditProduct;
+
+
+
+
+
+
+
+
 
 
 

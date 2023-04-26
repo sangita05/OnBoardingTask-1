@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { Button, Table, Icon, Segment } from 'semantic-ui-react';
+import { Button, Table, Icon, Segment, Dropdown } from 'semantic-ui-react';
 import axios from 'axios';
 import CreateCustomer from './CreateCustomer';
 import EditCustomer from './EditCustomer';
@@ -14,22 +14,31 @@ const CustomerTable = () => {
     const [selectedCustomer, setSelectedCustomer] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
 
 
 
 
     useEffect(() => {
-        getCustomers()
+        getCustomers(pageNumber, pageSize)
             .then(response => {
                 setCustomers(response);
+                setCurrentPage(pageNumber);
             })
             .catch(error => {
                 console.log(error);
             })
     }, []);
 
-    const getCustomers = async () => {
-        const res = await axios.get(`https://localhost:7160/api/Customers`);
+    const getCustomers = async (pageNumber, pageSize) => {
+        const res = await axios.get(`https://localhost:7160/api/Customers`, {
+        params: {
+            pageNumber: pageNumber,
+                pageSize: pageSize
+        }
+    });
         return res.data;
     }
 
@@ -48,8 +57,14 @@ const CustomerTable = () => {
     function handleCreateCustomer(newCustomer) {
         setCustomers([...customers, newCustomer]);
         handleCreateModalClose();
-
+        refreshCustomerList();
     }
+
+
+    const refreshCustomerList = () => {
+        getCustomers(pageNumber, pageSize);
+    };
+
     function handleCreateModalOpen() {
         setIsCreateModalOpen(true);
     }
@@ -78,8 +93,28 @@ const CustomerTable = () => {
     function handleDeleteCustomer(customer) {
         const updatedCustomers = customers.filter((s) => s.id !== customer.id);
         setCustomers(updatedCustomers);
-/*        refreshCustomerList();
-*/    }
+    }
+
+
+    const handlePreviousPage = () => {
+        setPageNumber(prevPageNumber => prevPageNumber - 1);
+    };
+
+    const handleNextPage = () => {
+        setPageNumber(prevPageNumber => prevPageNumber + 1);
+    };
+
+    const handlePageSizeChange = (event, { value }) => {
+        setPageSize(value);
+        setPageNumber(1);
+    };
+
+    const pageSizeOptions = [
+        { key: 10, value: 10, text: '10' },
+        { key: 20, value: 20, text: '20' },
+        { key: 30, value: 30, text: '30' },
+    ];
+
 
 
     let tableData = null;
@@ -106,7 +141,6 @@ const CustomerTable = () => {
 
     return (
         <Segment>
-            <h2>Customers Details</h2>   
             <Button primary onClick={handleCreateModalOpen}>Create Customer</Button>          
             <Table celled selectable>
                 <Table.Header>
@@ -147,6 +181,30 @@ const CustomerTable = () => {
                     onDelete={handleDeleteCustomer}
                 />
             )}
+
+
+
+            <div className="pagination">
+
+                <Button icon labelPosition='left' disabled={pageNumber === 1} onClick={handlePreviousPage}>
+                    <Icon name='left arrow' />
+                    Previous
+                </Button>
+
+                <Button icon labelPosition='right' disabled={customers.length < pageSize} onClick={handleNextPage}>
+                    Next
+                    <Icon name='right arrow' />
+                </Button>
+                <Dropdown
+                    placeholder='Page size'
+                    selection
+                    options={pageSizeOptions}
+                    value={pageSize}
+                    onChange={handlePageSizeChange}
+                />
+                <span className="page-number">Page {currentPage}</span>
+            </div>
+
         </Segment>
     );
 };

@@ -1,8 +1,8 @@
 ﻿import React, { useState } from 'react';
-import { Modal, Button, Icon } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react';
 import axios from 'axios';
 
-function DeleteCustomer(props) {
+function DeleteStore(props) {
     const [error, setError] = useState(null);
 
     function handleCancel() {
@@ -10,9 +10,10 @@ function DeleteCustomer(props) {
     }
 
     function handleDelete() {
-        deleteCustomer(props.customer.id)
+/*        debugger
+*/        deleteStore(props.store.id)
             .then(() => {
-                props.onDelete(props.customer);
+                props.onDelete(props.store);
                 props.onClose();
             })
             .catch((error) => {
@@ -20,27 +21,27 @@ function DeleteCustomer(props) {
             });
     }
 
-    function deleteCustomer(id) {
-        const endpoint = `https://localhost:7160/api/Customers/${id}`;
+    function deleteStore(id) {
+        const endpoint = `https://localhost:7160/api/Stores/${id}`;
         const data = { id };
         return axios
             .delete(endpoint, data)
             .then((response) => {
-            if (response === null) {
-                throw new Error('Failed to delete customer');
-            }
-        })
-            .catch (() => {
-            throw new Error('Failed to delete customer');
-        });
+                if (response === null) {
+                    throw new Error('Failed to delete store');
+                }
+            })
+            .catch(() => {
+                throw new Error('Failed to delete store');
+            });
     }
 
     return (
         <Modal open={props.open} onClose={props.onClose}>
-            <Modal.Header>Delete Customer</Modal.Header>
+            <Modal.Header>Delete Store</Modal.Header>
             {error && <div className="error">{error}</div>}
             <Modal.Content>
-                <p>Are you sure you want to delete this customer?</p>
+                <p>Are you sure you want to delete this store?</p>
             </Modal.Content>
             <Modal.Actions>
                 <Button className="cancel-btn black" onClick={handleCancel}>Cancel</Button>
@@ -50,4 +51,4 @@ function DeleteCustomer(props) {
     );
 }
 
-export default DeleteCustomer;
+export default DeleteStore;

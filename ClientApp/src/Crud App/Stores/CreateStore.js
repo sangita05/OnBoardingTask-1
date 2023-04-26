@@ -2,12 +2,10 @@
 import { Button, Modal, Form } from 'semantic-ui-react';
 import axios from 'axios';
 
-
-function CreateCustomer(props) {
+function CreateStore(props) {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [error, setError] = useState(null);
-
 
     function handleNameChange(event) {
         setName(event.target.value);
@@ -17,15 +15,14 @@ function CreateCustomer(props) {
         setAddress(event.target.value);
     }
 
-
     function handleCancel() {
         props.onClose();
     }
 
     function handleSave() {
-        createCustomer(name, address)
-            .then((newCustomer) => {
-                props.onCreate(newCustomer);
+        createStore(name, address)
+            .then((newStore) => {
+                props.onCreate(newStore);
                 props.onClose();
             })
             .catch((error) => {
@@ -33,9 +30,8 @@ function CreateCustomer(props) {
             });
     }
 
- 
-    function createCustomer(name, address) {
-        const endpoint = `https://localhost:7160/api/Customers`; // Replace with your API endpoint
+    function createStore(name, address) {
+        const endpoint = `https://localhost:7160/api/Stores`; // Replace with your API endpoint
         const data = { name, address };
         return axios.post(endpoint, data)
             .then(response => {
@@ -47,10 +43,10 @@ function CreateCustomer(props) {
             });
     }
 
-
     return (
         <Modal open={props.open} onClose={props.onClose}>
-            <Modal.Header>Create Customer</Modal.Header>
+            <Modal.Header>Create Store</Modal.Header>
+            {error && <div className="error">{error}</div>}
             <Modal.Content>
                 <Form>
                     <Form.Field>
@@ -71,4 +67,4 @@ function CreateCustomer(props) {
     );
 }
 
-export default CreateCustomer;
+export default CreateStore;

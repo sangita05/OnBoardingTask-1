@@ -23,13 +23,29 @@ namespace ContosoUniversity.Controllers
 
         // GET: api/Sales
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
+        public async Task<ActionResult<IEnumerable<SaleViewModel>>> GetSales()
         {
-            return await _context.Sales.ToListAsync();
+            var sales = await _context.Sales
+            .Include(s => s.Customer)
+            .Include(s => s.Product)
+            .Include(s => s.Store)
+            .ToListAsync();
+
+            var viewModel = sales.Select(sale => new SaleViewModel
+            {
+                SaleId = sale.SaleId, 
+                CustomerName = sale.Customer.Name,
+                ProductName = sale.Product.Name,
+                StoreAddress = sale.Store.Address,
+                DateSold = sale.DateSold
+            }).ToList();
+
+            return Ok(viewModel);
         }
 
-        // GET: api/Sales/5
-        [HttpGet("{id}")]
+
+    // GET: api/Sales/5
+    [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(int id)
         {
             var sale = await _context.Sales.FindAsync(id);

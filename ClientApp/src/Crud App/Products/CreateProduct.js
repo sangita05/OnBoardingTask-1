@@ -3,29 +3,27 @@ import { Button, Modal, Form } from 'semantic-ui-react';
 import axios from 'axios';
 
 
-function CreateCustomer(props) {
+function CreateProduct(props) {
     const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
+    const [price, setPrice] = useState('');
     const [error, setError] = useState(null);
-
 
     function handleNameChange(event) {
         setName(event.target.value);
     }
 
-    function handleAddressChange(event) {
-        setAddress(event.target.value);
+    function handlePriceChange(event) {
+        setPrice(event.target.value);
     }
-
 
     function handleCancel() {
         props.onClose();
     }
 
     function handleSave() {
-        createCustomer(name, address)
-            .then((newCustomer) => {
-                props.onCreate(newCustomer);
+        createProduct(name, price)
+            .then((newProduct) => {
+                props.onCreate(newProduct);
                 props.onClose();
             })
             .catch((error) => {
@@ -33,24 +31,23 @@ function CreateCustomer(props) {
             });
     }
 
- 
-    function createCustomer(name, address) {
-        const endpoint = `https://localhost:7160/api/Customers`; // Replace with your API endpoint
-        const data = { name, address };
+    function createProduct(name, price) {
+        const endpoint = `https://localhost:7160/api/Products`; // Replace with your API endpoint
+        const data = { name, price };
         return axios.post(endpoint, data)
             .then(response => {
                 const { id } = response.data;
-                return { id, name, address };
+                return { id, name, price };
             })
             .catch(() => {
                 throw new Error('Failed to create customer');
             });
     }
 
-
     return (
         <Modal open={props.open} onClose={props.onClose}>
-            <Modal.Header>Create Customer</Modal.Header>
+            <Modal.Header>Create Product</Modal.Header>
+            {error && <div className="error">{error}</div>}
             <Modal.Content>
                 <Form>
                     <Form.Field>
@@ -58,8 +55,8 @@ function CreateCustomer(props) {
                         <input value={name} onChange={handleNameChange} />
                     </Form.Field>
                     <Form.Field>
-                        <label>Address</label>
-                        <input value={address} onChange={handleAddressChange} />
+                        <label>Price</label>
+                        <input value={price} onChange={handlePriceChange} />
                     </Form.Field>
                 </Form>
             </Modal.Content>
@@ -71,4 +68,5 @@ function CreateCustomer(props) {
     );
 }
 
-export default CreateCustomer;
+export default CreateProduct;
+
