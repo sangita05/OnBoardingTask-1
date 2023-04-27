@@ -326,29 +326,17 @@ function EditSale(props) {
             });
     }
 
+
+
     function updateSale(saleId, productId, customerId, storeId, dateSold) {
-        const updatedSale = {};
-
-        if (productId) {
-            updatedSale.productId = productId;
-        }
-
-        if (customerId) {
-            updatedSale.customerId = customerId;
-        }
-
-        if (storeId) {
-            updatedSale.storeId = storeId;
-        }
-
-        if (dateSold) {
-            updatedSale.dateSold = dateSold;
-        }
-
-        return axios.put(`https://localhost:7160/api/sales/${saleId}`, updatedSale)
+        //const formattedDateSold = Moment(dateSold, 'YYYY-MM-DD').toDate();
+        debugger;
+        const url = `https://localhost:7160/api/sales/${saleId}`;
+/*        const data = { productId, customerId, storeId, dateSold };
+*/        return axios.put(url, (saleId, { productId, customerId, storeId, dateSold }))
             .then(response => {
                 if (response.status === 204) {
-                    return { ...props.sale, ...updatedSale };
+                    return { ...props.sale, productId, customerId, storeId, dateSold };
                 } else {
                     throw new Error('Failed to update sale');
                 }
@@ -358,38 +346,6 @@ function EditSale(props) {
             });
     }
 
-
-    /*function updateSale(saleId, productId, customerId, storeId, dateSold) {
-        //const formattedDateSold = moment(dateSold, 'YYYY-MM-DD').toDate();
-*//*        debugger;
-*//*        return axios.put(`https://localhost:7160/api/sales/${saleId}`, updatedSale) 
-            .then(response => {
-                if (response.status === 204) {
-                    return { ...props.sale, productId, customerId, storeId, dateSold };
-                } else {
-                    throw new Error('Failed to update sale');
-                }
-            })
-            .catch((error) => {
-                throw new Error(`Failed to update sale: ${error.message}`);
-            });
-    }*/
-
-  /*  function updateSale(saleId, productId, customerId, storeId, dateSold) {
-        //const formattedDateSold = Moment(dateSold, 'YYYY-MM-DD').toDate();
-        debugger;
-        return api.updateSale(saleId, { productId, customerId, storeId, dateSold })
-            .then(response => {
-                if (response.status === 204) {
-                    return { ...props.sale, productId, customerId, storeId, dateSold };
-                } else {
-                    throw new Error('Failed to update sale');
-                }
-            })
-            .catch((error) => {
-                throw new Error(`Failed to update sale: ${error.message}`);
-            });
-    }*/
 
     return (
         <Modal open={props.open} onClose={props.onClose} >
@@ -446,8 +402,8 @@ function EditSale(props) {
                 </Form>
             </Modal.Content>
             <Modal.Actions>
-                <Button onClick={handleCancel}>Cancel</Button>
-                <Button color="green" onClick={handleSave}>Save</Button>
+                <Button className="cancel-btn black" onClick={handleCancel}>Cancel</Button>
+                <Button className="save-btn green" onClick={handleSave}>Save</Button>
             </Modal.Actions>
         </Modal>
     );

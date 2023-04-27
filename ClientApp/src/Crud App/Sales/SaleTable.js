@@ -54,8 +54,8 @@ const SaleTable = () => {
     }
 
     function handleCreateSale(newSale) {
-        debugger
-        setSales([...sales, newSale]);
+/*        debugger
+*/        setSales([...sales, newSale]);
         handleCreateModalClose();
         refreshSaleList();
     }
@@ -118,31 +118,23 @@ const SaleTable = () => {
 
     //Moment.locale('en');
     let tableData = null;
-
     if (sales.length > 0) {
         tableData = sales.map(sale => (
             <Table.Row key={sale.saleId}>
-                <Table.Cell>{sale.customerName}</Table.Cell>
-                <Table.Cell>{sale.productName}</Table.Cell>
-                <Table.Cell>{sale.storeAddress}</Table.Cell>
+                <Table.Cell>{ sale.customerName }</Table.Cell>
+                <Table.Cell>{ sale.productName }</Table.Cell>
+                <Table.Cell>{ sale.storeAddress }</Table.Cell>
                 <Table.Cell>{moment(sale.dateSold).format('YYYY-MM-DD')}</Table.Cell>
-                <Table.Cell width={2}>
-                    <Button className="edit-btn yellow"
-                        name="edit outline"
-                        onClick={() => handleOpenEditSale(sale)}
-                    ><Icon name='edit'></Icon> Edit</Button>
-
+                <Table.Cell>
+                    <Button className="edit-btn yellow" name="edit outline" onClick={() => handleOpenEditSale(sale)}><Icon name="edit"></Icon>Edit</Button>
                 </Table.Cell>
-                <Table.Cell width={2}>
-                    <Button className="delete-btn red"
-                        name="delete"
-                        onClick={() => handleOpenDeleteSale(sale)}
-                    ><Icon name='trash alternate'></Icon>Delete</Button>
+                <Table.Cell>
+                    <Button className="delete-btn red" name="delete" onClick={() => handleOpenDeleteSale(sale)}><Icon name="trash alternate"></Icon>Delete</Button>
                 </Table.Cell>
             </Table.Row>
-        ));
+    ));
     }
-
+    
     return (
 
         <Segment>

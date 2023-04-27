@@ -120,8 +120,8 @@ function CreateSale(props) {
         return axios.post(endpoint, data)
             .then(response => {
                 const { id } = response.data;
-                debugger;
-                //const { id } = response;
+/*                debugger;
+*/                //const { id } = response;
                 return { id, productId, customerId, storeId, dateSold };
             })
             .catch((error) => {

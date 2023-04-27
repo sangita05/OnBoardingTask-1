@@ -44,8 +44,8 @@ function DeleteSale(props) {
                 <p>Are you sure you want to delete this sale?</p>
             </Modal.Content>
             <Modal.Actions>
-                <Button onClick={handleCancel}>Cancel</Button>
-                <Button negative onClick={handleDelete}>Delete</Button>
+                <Button className="cancel-btn black" onClick={handleCancel}>Cancel</Button>
+                <Button className="save-btn red" onClick={handleDelete}>Delete</Button>
             </Modal.Actions>
         </Modal>
     );
