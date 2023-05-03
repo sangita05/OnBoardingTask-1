@@ -30,7 +30,7 @@ const ProductTable = () => {
     }, []);
 
     const getProducts = async (pageNumber, pageSize) => {
-        const res = await axios.get(`https://localhost:7160/api/Products`, {
+        const res = await axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Products`, {
             params: {
                 pageNumber: pageNumber,
                 pageSize: pageSize

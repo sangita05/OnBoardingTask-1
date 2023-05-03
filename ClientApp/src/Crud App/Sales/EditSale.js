@@ -27,7 +27,7 @@ function EditSale(props) {
     function getProducts() {
         const pageNumber = 1; // set to 1
         const pageSize = 9999; // set to a large value or to the total count of products
-        axios.get(`https://localhost:7160/api/Products`, { params: { pageNumber, pageSize } })
+        axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Products`, { params: { pageNumber, pageSize } })
             .then(response => {
                 setProducts(response.data);
             })
@@ -39,7 +39,7 @@ function EditSale(props) {
     function getCustomers() {
         const pageNumber = 1; // set to 1
         const pageSize = 9999; // set to a large value or to the total count of products
-        axios.get(`https://localhost:7160/api/Customers`, { params: { pageNumber, pageSize } })
+        axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Customers`, { params: { pageNumber, pageSize } })
             .then(response => {
                 setCustomers(response.data);
             })
@@ -51,7 +51,7 @@ function EditSale(props) {
     function getStores() {
         const pageNumber = 1; // set to 1
         const pageSize = 9999; // set to a large value or to the total count of products
-        axios.get(`https://localhost:7160/api/Stores`, { params: { pageNumber, pageSize } })
+        axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Stores`, { params: { pageNumber, pageSize } })
             .then(response => {
                 setStores(response.data);
             })
@@ -121,7 +121,7 @@ function EditSale(props) {
     function updateSale(saleId, productId, customerId, storeId, dateSold) {
         //const formattedDateSold = Moment(dateSold, 'YYYY-MM-DD').toDate();
         debugger;
-        const url = `https://localhost:7160/api/sales/${saleId}`;
+        const url = `https://contosouniversity20230503222654.azurewebsites.net/api/sales/${saleId}`;
 /*        const data = { productId, customerId, storeId, dateSold };
 */        return axios.put(url, (saleId, { productId, customerId, storeId, dateSold }))
             .then(response => {

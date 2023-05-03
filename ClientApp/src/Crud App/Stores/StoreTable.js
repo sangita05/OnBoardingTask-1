@@ -28,7 +28,7 @@ export default function StoreTable() {
     }, []);
 
     const getStores = async (pageNumber, pageSize) => {
-        const res = await axios.get(`https://localhost:7160/api/Stores`, {
+        const res = await axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Stores`, {
             params: {
                 pageNumber: pageNumber,
                 pageSize: pageSize

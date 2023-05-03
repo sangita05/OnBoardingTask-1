@@ -32,7 +32,7 @@ function EditProduct(props) {
 
 
     function updateProduct(id, name, price) {
-        const endpoint = `https://localhost:7160/api/Products/${id}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Products/${id}`;
         const data = { name, price };
 
         return axios

@@ -34,7 +34,7 @@ function EditCustomer(props) {
     }
 
     function updateCustomer(id, name, address) {
-        const endpoint = `https://localhost:7160/api/Customers/${id}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Customers/${id}`;
         const data = { name, address };
 
         return axios

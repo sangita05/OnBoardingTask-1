@@ -21,7 +21,7 @@ function DeleteCustomer(props) {
     }
 
     function deleteCustomer(id) {
-        const endpoint = `https://localhost:7160/api/Customers/${id}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Customers/${id}`;
         const data = { id };
         return axios
             .delete(endpoint, data)

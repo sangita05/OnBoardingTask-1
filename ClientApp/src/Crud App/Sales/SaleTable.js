@@ -24,7 +24,7 @@ const SaleTable = () => {
     }, [pageNumber, pageSize]);
 
     const getSales = async (pageNumber, pageSize) => {
-        const res = await axios.get(`https://localhost:7160/api/Sales`, {
+        const res = await axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Sales`, {
             params: {
                 pageNumber: pageNumber,
                 pageSize: pageSize

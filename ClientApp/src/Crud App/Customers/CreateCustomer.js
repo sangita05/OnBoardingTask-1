@@ -35,7 +35,7 @@ function CreateCustomer(props) {
 
  
     function createCustomer(name, address) {
-        const endpoint = `https://localhost:7160/api/Customers`; // Replace with your API endpoint
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Customers`; // Replace with your API endpoint
         const data = { name, address };
         return axios.post(endpoint, data)
             .then(response => {

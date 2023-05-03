@@ -22,7 +22,7 @@ function DeleteStore(props) {
     }
 
     function deleteStore(id) {
-        const endpoint = `https://localhost:7160/api/Stores/${id}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Stores/${id}`;
         const data = { id };
         return axios
             .delete(endpoint, data)

@@ -22,7 +22,7 @@ function DeleteSale(props) {
     }
 
     function deleteSale(saleId) {
-        const endpoint = `https://localhost:7160/api/Sales/${saleId}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Sales/${saleId}`;
         const data = { saleId };
         return axios
             .delete(endpoint, data)

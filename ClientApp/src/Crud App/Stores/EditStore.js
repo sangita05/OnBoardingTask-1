@@ -34,7 +34,7 @@ function EditStore(props) {
     }
 
     function updateStore(id, name, address) {
-        const endpoint = `https://localhost:7160/api/Stores/${id}`;
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Stores/${id}`;
         const data = { name, address };
 
         return axios

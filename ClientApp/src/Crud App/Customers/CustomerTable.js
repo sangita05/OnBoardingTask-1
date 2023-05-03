@@ -33,7 +33,7 @@ const CustomerTable = () => {
     }, []);
 
     const getCustomers = async (pageNumber, pageSize) => {
-        const res = await axios.get(`https://localhost:7160/api/Customers`, {
+        const res = await axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Customers`, {
         params: {
             pageNumber: pageNumber,
                 pageSize: pageSize

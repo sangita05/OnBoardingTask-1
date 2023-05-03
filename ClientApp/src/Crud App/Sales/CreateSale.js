@@ -27,7 +27,7 @@ function CreateSale(props) {
         const pageNumber = 1; 
         const pageSize = 9999; 
 
-        axios.get(`https://localhost:7160/api/Products`, { params: { pageNumber, pageSize } })
+        axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Products`, { params: { pageNumber, pageSize } })
             .then(response => {
                 setProducts(response.data);
             })
@@ -40,7 +40,7 @@ function CreateSale(props) {
         const pageNumber = 1; 
         const pageSize = 9999; 
 
-        axios.get(`https://localhost:7160/api/Customers`, { params: { pageNumber, pageSize } })
+        axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Customers`, { params: { pageNumber, pageSize } })
             .then(response => {
                 setCustomers(response.data);
             })
@@ -54,7 +54,7 @@ function CreateSale(props) {
             const pageNumber = 1; 
             const pageSize = 9999; 
 
-            axios.get(`https://localhost:7160/api/Stores`, { params: { pageNumber, pageSize } })
+            axios.get(`https://contosouniversity20230503222654.azurewebsites.net/api/Stores`, { params: { pageNumber, pageSize } })
                 .then(response => {
                     setStores(response.data);
                 })
@@ -115,7 +115,7 @@ function CreateSale(props) {
     }
 
     function createSale(productId, customerId, storeId, dateSold) {
-        const endpoint = `https://localhost:7160/api/Sales`; // Replace with your API endpoint
+        const endpoint = `https://contosouniversity20230503222654.azurewebsites.net/api/Sales`; // Replace with your API endpoint
         const data = { productId, customerId, storeId, dateSold };
         return axios.post(endpoint, data)
             .then(response => {
