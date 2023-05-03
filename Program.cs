@@ -2,6 +2,7 @@ using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 var CorsPolicy = "_CorsPolicy";
@@ -9,14 +10,14 @@ var CorsPolicy = "_CorsPolicy";
 //add new line
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ContosoUniversityContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("ContosoUniversityContext")));
+  options.UseSqlServer(builder.Configuration.GetConnectionString("ContosoUniversityContextString")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: CorsPolicy,
                 policy =>
                 {
-                    policy.WithOrigins("https://localhost:44405", "https://localhost:7160") //is that 3000?
+                    policy.WithOrigins("*") //is that 3000?
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
@@ -64,6 +65,10 @@ using (var scope = app.Services.CreateScope())
 }
 //end
 
+
+
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -77,3 +82,10 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+/*app.UseCors();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseEndpoints();
+app.UseStaticFiles();*/

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/talentonboardingmvc/databases/SchoolContext",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:ContosoUniversityContextString"
+    }
+  }
+}

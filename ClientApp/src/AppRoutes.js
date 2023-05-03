@@ -1,5 +1,5 @@
-import { Counter } from "./components/Counter";
-import { Home } from "./components/Home";
+/*import { Counter } from "./components/Counter";
+*/import { Home } from "./components/Home";
 
 import CustomerTable from "./Crud App/Customers/CustomerTable";
 import ProductTable from "./Crud App/Products/ProductTable";
@@ -12,11 +12,6 @@ const AppRoutes = [
   {
     index: true,
     element: <Home />
-  },
-
-  {
-    path: '/counter',
-    element: <Counter />
   },
 
   {
